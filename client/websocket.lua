@@ -40,4 +40,4 @@ function websocket.send(self, str)
     self.obj:Send(str)
 end
 
-return websocket end
+return websocket

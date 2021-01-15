@@ -11,7 +11,8 @@ async def on_register(websocket, identifier):
 
 async def on_unregister(identifier, *err):
     if connections.get(identifier):
-        await discord.on_unregister(identifier, *err)
+        print("Unregistered "+identifier)
+        await discord.on_unregister(identifier)
         await handler.on_unregister(identifier, connections[identifier])
         del connections[identifier]
     if err:

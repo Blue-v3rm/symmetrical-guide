@@ -6,18 +6,19 @@ client = commands.Bot(command_prefix=".")
 channel = None
 
 async def on_register(identifier):
-    print("Registered connection from "+identifier)
-    if channel:
+    global channel
+    if channel != None:
         await channel.send(identifier+" just connected.")
     pass
 
-async def on_unregister(identifier, *err):
-    print("Unregistered "+identifier)
-    if channel:
-        channel.send(identifier+" closed connection with the websocket.")
+async def on_unregister(identifier):
+    global channel
+    if channel != None:
+        await channel.send(identifier+" closed connection with the websocket.")
 
 @client.event
 async def on_message(message):
+    global channel
     if message.content[0] != "!": return
     args = message.content[1:].split(" ")
     if args[0] == "here":
